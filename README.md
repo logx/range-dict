@@ -1,15 +1,37 @@
 ### RangeDict 
+Ranges are omnipresent in our lives - we are talking about durations, lengths or intervals. 
+Unfortunately they are hard to model in code using standard data structures built in mainstream languages.
+
+
+This library offers you fast `range dict` implementation, built on top of Python's standard dictionary.  
+
+#### Example usage
 
 ```python
->>> extraordinary_events = RangeDict()
+>>> holidays = RangeDict()
 
->>> extraordinary_events[date(2020, 2, 12), date(2020, 6, 1)] = "coronavirus_lockdown"
+>>> holidays[date(2020, 7, 1), date(2020, 7, 14)] = "John's holidays"
 
->>> extraordinary_events[date(2020, 4, 10)]
-"coronavirus_lockdown"
+>>> holidays[date(2020, 7, 10)]
+"John's holidays"
 
->>> extraordinary_events[date(2020, 5, 1), date(2020, 5, 3)] = "may_holidays"
+>>> holidays[date(2020, 7, 10), date(2020, 5, 20)] = "Mary's holidays"
 
->>> extraordinary_events[date(2020, 5, 1)]
-["coronavirus_lockdown", "may_holidays"]
+>>> holidays[date(2020, 7, 12)]
+["John's holidays", "Mary's holidays"]
+```
+
+#### Supported data types
+Range can be expressed using:
+ - int
+ - float
+ - date
+ - datetime
+
+#### Standard behavior
+Because `RangeDict` extends Python's standard dictionary,
+it is capable of accepting single value as a key:
+
+```python
+>>> holidays[date(2020, 7, 12)] = "Piotr's (one day) holidays"
 ```
