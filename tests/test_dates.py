@@ -56,4 +56,3 @@ def test_overlapping_ranges(first_range, first_value, second_range, second_value
     holidays[second_range] = second_value
 
     assert holidays.get(key) == expected_value
-
