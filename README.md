@@ -15,7 +15,7 @@ This library offers you fast `range dict` implementation, built on top of Python
 >>> holidays[date(2020, 7, 10)]
 "John's holidays"
 
->>> holidays[date(2020, 7, 10), date(2020, 5, 20)] = "Mary's holidays"
+>>> holidays[date(2020, 7, 10), date(2020, 7, 20)] = "Mary's holidays"
 
 >>> holidays[date(2020, 7, 12)]
 ["John's holidays", "Mary's holidays"]
@@ -33,5 +33,5 @@ Because `RangeDict` extends Python's standard dictionary,
 it is capable of accepting single value as a key:
 
 ```python
->>> holidays[date(2020, 7, 12)] = "Piotr's (one day) holidays"
+>>> holidays[date(2020, 7, 12)] = "Piotr's (one day) holiday"
 ```
