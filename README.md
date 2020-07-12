@@ -17,7 +17,7 @@ This library offers you fast `range dict` implementation, built on top of Python
 
 >>> holidays[date(2020, 7, 10), date(2020, 7, 20)] = "Mary's holidays"
 
->>> holidays[date(2020, 7, 12)]
+>>> holidays[date(2020, 7, 10)]
 ["John's holidays", "Mary's holidays"]
 ```
 
