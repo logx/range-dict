@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import TypeVar, Optional, Tuple, Any
+from typing import TypeVar, Optional, Tuple, Any, Generic
 
 logger = logging.getLogger("range_dict.interval_tree")
 
@@ -11,7 +11,7 @@ T = TypeVar('T', int, float, date, datetime)
 
 
 @dataclass
-class Node:
+class Node(Generic[T]):
     range_key: Tuple[T, T]
 
     max_key: T
