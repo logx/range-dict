@@ -6,4 +6,5 @@ class RangeDict(dict):
         "int": IntervalTree(),
         "float": IntervalTree(),
         "date": IntervalTree(),
+        "datetime": IntervalTree(),
     }

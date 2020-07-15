@@ -40,7 +40,7 @@ class IntervalTree:
 
     def _insert(self, node: Node, range_key: Tuple[T, T], value: Any):
         """
-        Utility function, hare actual recursive inserting happens.
+        Utility function, here actual recursive inserting happens.
         """
         lower_key, higher_key = range_key
         node_lower_key, node_higher_key = node.range_key
