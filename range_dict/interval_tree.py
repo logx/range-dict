@@ -26,12 +26,7 @@ class IntervalTree:
     root: Optional[Node] = None
 
     def insert(self, range_key: Tuple[T, T], value: Any) -> None:
-        lower_key, higher_key = range_key
-
-        if lower_key > higher_key:
-            logger.warning(f"Inverting order of keys passed to Range Dict's Interval Tree: "
-                           f"{range_key} -> {higher_key, lower_key}")
-            range_key = higher_key, lower_key
+        range_key = _check_key(range_key)
 
         if not self.root:
             self.root = Node(range_key, range_key[1], value)
@@ -40,6 +35,8 @@ class IntervalTree:
         _insert(self.root, range_key, value)
 
     def find(self, range_key: Tuple[T, T]) -> List[Any]:
+        range_key = _check_key(range_key)
+
         return _find(self.root, range_key, accumulator=[])
 
 
@@ -90,3 +87,19 @@ def _overlap(range_key_1: Tuple[T, T], range_key_2: Tuple[T, T]) -> bool:
     lower_key_2, higher_key_2 = range_key_2
 
     return lower_key_1 <= higher_key_2 and lower_key_2 <= higher_key_1
+
+
+def _check_key(range_key: Tuple[T, T]) -> Tuple[T, T]:
+    lower_key, higher_key = range_key
+
+    try:
+        _ = lower_key > higher_key
+    except TypeError:
+        raise KeyError(f"Illegal key, can not compare '{lower_key}' with '{higher_key}'")
+
+    if lower_key > higher_key:
+        logger.warning(f"Inverting order of keys passed to Range Dict's Interval Tree: "
+                       f"{range_key} -> {higher_key, lower_key}")
+        range_key = higher_key, lower_key
+
+    return range_key
