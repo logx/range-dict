@@ -67,3 +67,19 @@ def test_illegal_range_raises_error(range_key):
 
     with pytest.raises(KeyError):
         tree.insert(range_key, "whatever")
+
+
+@pytest.mark.parametrize(
+    "range_key", [
+        (10,                   1),
+        (10.0,                 1.0),
+        (date(2020, 1, 1),     date(1997, 1, 1)),
+        (datetime(2020, 1, 1), datetime(1997, 1, 1))
+    ]
+)
+def test_sort_range(range_key, caplog):
+    tree = IntervalTree()
+
+    tree.insert(range_key, "whatever")
+
+    assert "Inverting order of keys passed to Range Dict's Interval Tree" in caplog.text
