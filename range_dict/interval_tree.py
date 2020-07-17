@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import TypeVar, Optional, Tuple, Any, Generic
+from typing import TypeVar, Optional, Tuple, Any, Generic, List
 
 logger = logging.getLogger("range_dict.interval_tree")
 
@@ -29,32 +29,64 @@ class IntervalTree:
         lower_key, higher_key = range_key
 
         if lower_key > higher_key:
+            logger.warning(f"Inverting order of keys passed to Range Dict's Interval Tree: "
+                           f"{range_key} -> {higher_key, lower_key}")
             range_key = higher_key, lower_key
-            logger.warning(f"Inverting order of keys passed to Range Dict's Interval Tree -> {range_key}")
 
         if not self.root:
             self.root = Node(range_key, range_key[1], value)
             return
 
-        self._insert(self.root, range_key, value)
+        _insert(self.root, range_key, value)
 
-    def _insert(self, node: Node, range_key: Tuple[T, T], value: Any):
-        """
-        Utility function, here actual recursive inserting happens.
-        """
-        lower_key, higher_key = range_key
-        node_lower_key, node_higher_key = node.range_key
+    def find(self, range_key: Tuple[T, T]) -> List[Any]:
+        return _find(self.root, range_key, accumulator=[])
 
-        if lower_key < node_lower_key:
-            if not node.left:
-                node.left = Node(range_key, range_key[1], value)
-            else:
-                self._insert(node.left, range_key, value)
+
+def _insert(node: Node, range_key: Tuple[T, T], value: Any):
+    """
+    Utility function, here actual recursive inserting happens.
+    """
+    lower_key, higher_key = range_key
+    node_lower_key, node_higher_key = node.range_key
+
+    if lower_key < node_lower_key:
+        if not node.left:
+            node.left = Node(range_key, range_key[1], value)
         else:
-            if not node.right:
-                node.right = Node(range_key, range_key[1], value)
-            else:
-                self._insert(node.right, range_key, value)
+            _insert(node.left, range_key, value)
+    else:
+        if not node.right:
+            node.right = Node(range_key, range_key[1], value)
+        else:
+            _insert(node.right, range_key, value)
 
-        if node.max_key < higher_key:
-            node.max_key = higher_key
+    if node.max_key < higher_key:
+        node.max_key = higher_key
+
+
+def _find(node: Node, range_key: Tuple[T, T], accumulator: List[Any]) -> List[Any]:
+    """
+    Utility function, here actual recursive searching happens.
+    """
+    lower_key, higher_key = range_key
+
+    if _overlap(node.range_key, range_key):
+        accumulator.append(node.value)
+
+    if node.left and node.left.max_key >= lower_key:
+        _find(node.left, range_key, accumulator)
+    elif node.right:
+        _find(node.right, range_key, accumulator)
+
+    return accumulator
+
+
+def _overlap(range_key_1: Tuple[T, T], range_key_2: Tuple[T, T]) -> bool:
+    """
+    Checks if given ranges overlap.
+    """
+    lower_key_1, higher_key_1 = range_key_1
+    lower_key_2, higher_key_2 = range_key_2
+
+    return lower_key_1 <= higher_key_2 and lower_key_2 <= higher_key_1
