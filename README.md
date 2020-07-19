@@ -43,5 +43,5 @@ Library can be installed directly from GitHub using `pip`:
 pip install git+git://github.com/logx/range-dict.git@0.0.1
 ```
 Remember to replace `0.0.1` with actual version from [releases](https://github.com/logx/range-dict/releases). 
-Or skip `@0.0.1`to install most recent version.
+Or skip `@0.0.1` to install most recent version.
 

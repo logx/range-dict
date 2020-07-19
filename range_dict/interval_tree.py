@@ -23,7 +23,8 @@ class Node(Generic[T]):
 
 
 class IntervalTree:
-    root: Optional[Node] = None
+    def __init__(self):
+        self.root = None
 
     def insert(self, range_key: Tuple[T, T], value: Any) -> None:
         range_key = _format_key(range_key)
