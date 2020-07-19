@@ -27,6 +27,7 @@ Range can be expressed using:
  - float
  - date
  - datetime
+ - any other object that implements `__eq__` method
 
 #### Standard behavior
 Because `RangeDict` extends Python's standard dictionary,

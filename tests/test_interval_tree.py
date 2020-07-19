@@ -51,15 +51,16 @@ def test_tree(input_data, range_key, expected_value):
 
 @pytest.mark.parametrize(
     "range_key", [
-        (10,    date(2020, 7, 17)),
-        (10,    datetime(2020, 7, 17)),
-        (10.4,  date(2020, 7, 17)),
-        (10.4,  datetime(2020, 7, 17)),
-        (10.4,  datetime(2020, 7, 17)),
-        ("str", 10),
-        ("str", 10.4),
-        ("str", date(2020, 7, 17)),
-        ("str", datetime(2020, 7, 17)),
+        (10,       date(2020, 7, 17)),
+        (10,       datetime(2020, 7, 17)),
+        (10.4,     date(2020, 7, 17)),
+        (10.4,     datetime(2020, 7, 17)),
+        (10.4,     datetime(2020, 7, 17)),
+        ("str",    10),
+        ("str",    10.4),
+        ("str",    date(2020, 7, 17)),
+        ("str",    datetime(2020, 7, 17)),
+        (object(), object()),  # simple object is not comparable
     ]
 )
 def test_illegal_range_raises_error(range_key):

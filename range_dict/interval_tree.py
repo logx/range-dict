@@ -7,7 +7,7 @@ from typing import TypeVar, Optional, Tuple, Any, Generic, List
 
 logger = logging.getLogger("range_dict.interval_tree")
 
-T = TypeVar('T', int, float, date, datetime)
+T = TypeVar('T', int, float, date, datetime, Any)
 
 
 @dataclass
@@ -26,7 +26,7 @@ class IntervalTree:
     root: Optional[Node] = None
 
     def insert(self, range_key: Tuple[T, T], value: Any) -> None:
-        range_key = _check_key(range_key)
+        range_key = _format_key(range_key)
 
         if not self.root:
             self.root = Node(range_key, range_key[1], value)
@@ -35,9 +35,9 @@ class IntervalTree:
         _insert(self.root, range_key, value)
 
     def find(self, range_key: Tuple[T, T]) -> List[Any]:
-        range_key = _check_key(range_key)
+        range_key = _format_key(range_key)
 
-        return _find(self.root, range_key, accumulator=[])
+        return _find(self.root, range_key, accumulator=[]) if self.root else []
 
 
 def _insert(node: Node, range_key: Tuple[T, T], value: Any):
@@ -89,8 +89,11 @@ def _overlap(range_key_1: Tuple[T, T], range_key_2: Tuple[T, T]) -> bool:
     return lower_key_1 <= higher_key_2 and lower_key_2 <= higher_key_1
 
 
-def _check_key(range_key: Tuple[T, T]) -> Tuple[T, T]:
+def _format_key(range_key: Tuple[T, T]) -> Tuple[T, T]:
     lower_key, higher_key = range_key
+
+    if type(lower_key) != type(higher_key):
+        raise KeyError(f"Range Key must have elements of the same type ('{type(lower_key)}' != '{type(higher_key)}')")
 
     try:
         _ = lower_key > higher_key

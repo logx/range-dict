@@ -30,7 +30,7 @@ def test_available_range_for_key_returns_value(range_key, range_value, key):
 
     data[range_key] = range_value
 
-    assert data[key] == range_value
+    assert data[key] == [range_value]
 
 
 @pytest.mark.parametrize(
@@ -99,24 +99,24 @@ PRICES = (
         (*JOHN_MARY_HOLIDAYS, date(2020, 7, 10),             ["John's holidays", "Mary's holidays"]),
         (*JOHN_MARY_HOLIDAYS, date(2020, 7, 12),             ["John's holidays", "Mary's holidays"]),
         (*JOHN_MARY_HOLIDAYS, date(2020, 7, 14),             ["John's holidays", "Mary's holidays"]),
-        (*JOHN_MARY_HOLIDAYS, date(2020, 7, 1),              "John's holidays"),
-        (*JOHN_MARY_HOLIDAYS, date(2020, 7, 20),             "Mary's holidays"),
+        (*JOHN_MARY_HOLIDAYS, date(2020, 7, 1),              ["John's holidays"]),
+        (*JOHN_MARY_HOLIDAYS, date(2020, 7, 20),             ["Mary's holidays"]),
         (*JOHN_MARY_HOLIDAYS, date(2020, 8, 30),             None),
         (*TV_PROGRAM,         datetime(2020, 7, 12, 14, 30), ["Spider-Man: Into the Spider-Verse on HBO", "Doctor Who on BBC"]),
         (*TV_PROGRAM,         datetime(2020, 7, 12, 15, 0),  ["Spider-Man: Into the Spider-Verse on HBO", "Doctor Who on BBC"]),
-        (*TV_PROGRAM,         datetime(2020, 7, 12, 14, 10), "Doctor Who on BBC"),
-        (*TV_PROGRAM,         datetime(2020, 7, 12, 15, 30), "Spider-Man: Into the Spider-Verse on HBO"),
-        (*TV_PROGRAM,         datetime(2020, 7, 12, 16, 10), "Spider-Man: Into the Spider-Verse on HBO"),
+        (*TV_PROGRAM,         datetime(2020, 7, 12, 14, 10), ["Doctor Who on BBC"]),
+        (*TV_PROGRAM,         datetime(2020, 7, 12, 15, 30), ["Spider-Man: Into the Spider-Verse on HBO"]),
+        (*TV_PROGRAM,         datetime(2020, 7, 12, 16, 10), ["Spider-Man: Into the Spider-Verse on HBO"]),
         (*TV_PROGRAM,         datetime(2020, 7, 12, 20, 0),  None),
         (*SALARIES,           6000,                          ["Software Engineer at XYZ Inc.", "Software Engineer at ABC Inc."]),
         (*SALARIES,           8000,                          ["Software Engineer at XYZ Inc.", "Software Engineer at ABC Inc."]),
-        (*SALARIES,           4000,                          "Software Engineer at XYZ Inc."),
-        (*SALARIES,           10000,                         "Software Engineer at ABC Inc."),
+        (*SALARIES,           4000,                          ["Software Engineer at XYZ Inc."]),
+        (*SALARIES,           10000,                         ["Software Engineer at ABC Inc."]),
         (*SALARIES,           12000,                         None),
-        (*PRICES,             5000,                          ["Galaxy S20", "iPhone 11 Pro"]),
+        (*PRICES,             5000.0,                        ["Galaxy S20", "iPhone 11 Pro"]),
         (*PRICES,             4499.99,                       ["Galaxy S20", "iPhone 11 Pro"]),
-        (*PRICES,             3277.50,                       "Galaxy S20"),
-        (*PRICES,             5490.10,                       "iPhone 11 Pro"),
+        (*PRICES,             3277.50,                       ["Galaxy S20"]),
+        (*PRICES,             5490.10,                       ["iPhone 11 Pro"]),
         (*PRICES,             2999.99,                       None),
     ]
 )
