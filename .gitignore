@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+bin/
+*.pyc
+
+# Distribution / packaging
+.idea/
+pacts/
+temp/
+tmp/
+
+# Test / coverage reports
+.cache
+.coverage
+.coverage*
+.pytest_cache
+.mypy_cache
+
+# OS X
+.DS_Store
+
+# Documentation
+docs/build
