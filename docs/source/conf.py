@@ -41,6 +41,9 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# Assign the master document
+# https://www.sphinx-doc.org/en/master/usage/configuration.html?highlight=master_doc
+master_doc = 'index'
 
 # -- Options for HTML output -------------------------------------------------
 
