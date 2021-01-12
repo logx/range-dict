@@ -1,3 +1,7 @@
+[![Python checks](https://github.com/logx/range-dict/workflows/Python%checks/badge.svg)](https://github.com/logx/range-dict/actions)
+[![CodeQL](https://github.com/logx/range-dict/workflows/CodeQL/badge.svg)](https://github.com/logx/range-dict/actions)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/logx/range-dict/blob/master/LICENSE.txt)
+
 ### RangeDict 
 Ranges are omnipresent in our lives - we are talking about durations, lengths or intervals. 
 Unfortunately they are hard to model in code using standard data structures built in mainstream languages.
