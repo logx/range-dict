@@ -1,4 +1,4 @@
-[![Python checks](https://github.com/logx/range-dict/workflows/Python%package/badge.svg)](https://github.com/logx/range-dict/actions)
+[![Python package](https://github.com/logx/range-dict/workflows/Python%20package/badge.svg)](https://github.com/logx/range-dict/actions)
 [![CodeQL](https://github.com/logx/range-dict/workflows/CodeQL/badge.svg)](https://github.com/logx/range-dict/actions)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/logx/range-dict/blob/master/LICENSE.txt)
 
