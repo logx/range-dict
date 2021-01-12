@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import TypeVar, Any, Tuple, Union
+from typing import TypeVar, Any, Tuple, Union, List, Dict, Optional
 
 from range_dict.interval_tree import IntervalTree
 
@@ -7,13 +7,17 @@ T = TypeVar('T', int, float, date, datetime, Any)
 
 
 class RangeDict:
-    def __init__(self):
+    def __init__(self, initial_dict: Optional[Dict[Union[T, Tuple[T, T]], Any]] = None):
         self._buckets = {
             "int": IntervalTree(),
             "float": IntervalTree(),
             "date": IntervalTree(),
             "datetime": IntervalTree(),
         }
+
+        if initial_dict:
+            for key, value in initial_dict.items():
+                self.__setitem__(key, value)
 
     def __setitem__(self, key: Union[T, Tuple[T, T]], value: Any) -> None:
         lower_key, higher_key = _format_key(key)
@@ -55,8 +59,13 @@ class RangeDict:
     def items(self):  # pragma: no cover
         raise NotImplementedError
 
-    def keys(self):  # pragma: no cover
-        raise NotImplementedError
+    def keys(self) -> List[Any]:
+        keys = []
+
+        for interval_tree in self._buckets.values():
+            keys += interval_tree.keys()
+
+        return keys
 
     def values(self):  # pragma: no cover
         raise NotImplementedError

@@ -40,6 +40,9 @@ class IntervalTree:
 
         return _find(self.root, range_key, accumulator=[]) if self.root else []
 
+    def keys(self) -> List[Any]:
+        return _keys(self.root, accumulator=[]) if self.root else []
+
 
 def _insert(node: Node, range_key: Tuple[T, T], value: Any):
     """
@@ -107,3 +110,15 @@ def _format_key(range_key: Tuple[T, T]) -> Tuple[T, T]:
         range_key = higher_key, lower_key
 
     return range_key
+
+
+def _keys(node: Node, accumulator: List[Any]) -> List[Any]:
+    accumulator.append(node.range_key)
+
+    if node.left:
+        _keys(node.left, accumulator)
+
+    if node.right:
+        _keys(node.right, accumulator)
+
+    return accumulator

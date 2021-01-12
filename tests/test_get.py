@@ -26,9 +26,7 @@ from range_dict import RangeDict
     ]
 )
 def test_available_range_for_key_returns_value(range_key, range_value, key):
-    data = RangeDict()
-
-    data[range_key] = range_value
+    data = RangeDict({range_key: range_value})
 
     assert data[key] == [range_value]
 
@@ -44,9 +42,7 @@ def test_available_range_for_key_returns_value(range_key, range_value, key):
     ]
 )
 def test_missing_range_for_key_raises_error(range_key, key):
-    data = RangeDict()
-
-    data[range_key] = "some_value"
+    data = RangeDict({range_key: "some_value"})
 
     with pytest.raises(KeyError):
         _ = data[key]

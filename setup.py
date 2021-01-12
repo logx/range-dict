@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="range_dict",
-    version="0.1.0",
+    version="0.1.1",
     description="Store ranges as keys in a dictionary",
     author="Piotr Kardaś",
     author_email="pkardas.it@gmail.com",
