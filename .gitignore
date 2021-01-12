@@ -8,6 +8,7 @@ bin/
 pacts/
 temp/
 tmp/
+dist/
 
 # Test / coverage reports
 .cache

@@ -49,3 +49,7 @@ pip install git+git://github.com/logx/range-dict.git@0.0.1
 Remember to replace `0.0.1` with actual version from [releases](https://github.com/logx/range-dict/releases). 
 Or skip `@0.0.1` to install the most recent version.
 
+Or installed using PIP [recommended]:
+```
+pip install range-dict
+```
