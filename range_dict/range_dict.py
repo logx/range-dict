@@ -47,8 +47,8 @@ class RangeDict:
     def __delitem__(self, key: Union[T, Tuple[T, T]]):  # pragma: no cover
         raise NotImplementedError
 
-    def __len__(self):  # pragma: no cover
-        raise NotImplementedError
+    def __len__(self) -> int:
+        return len(self.keys())
 
     def get(self, key: Union[T, Tuple[T, T]], default=None) -> Any:
         try:

@@ -24,3 +24,16 @@ VAL = "some value"
 )
 def test_get_keys(initial_dict, expected_keys):
     assert RangeDict(initial_dict).keys() == expected_keys
+
+
+@pytest.mark.parametrize(
+    "initial_dict, expected_length", [
+        ({},                                   0),
+        ({KEY_0: VAL},                         1),
+        ({KEY_0: VAL, KEY_1: VAL},             2),
+        ({KEY_1: VAL, KEY_2: VAL},             2),
+        ({KEY_0: VAL, KEY_1: VAL, KEY_2: VAL}, 3),
+    ]
+)
+def test_length(initial_dict, expected_length):
+    assert len(RangeDict(initial_dict)) == expected_length
