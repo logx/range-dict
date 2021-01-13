@@ -15,8 +15,7 @@ VAL = "some value"
     "initial_dict, expected_keys", [
         ({},                       []),
         ({KEY_0: VAL},             [KEY_0]),
-        # Order of the keys of different type does not depend on order of insertion
-        ({KEY_0: VAL, KEY_1: VAL}, [KEY_1, KEY_0]),
+        ({KEY_0: VAL, KEY_1: VAL}, [KEY_0, KEY_1]),
         ({KEY_1: VAL, KEY_0: VAL}, [KEY_1, KEY_0]),
         ({KEY_1: VAL, KEY_2: VAL}, [KEY_1, KEY_2]),
         ({KEY_2: VAL, KEY_1: VAL}, [KEY_2, KEY_1]),

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date, datetime
 from typing import TypeVar, Any, Tuple, Union, List, Dict, Optional
 
@@ -8,12 +9,7 @@ T = TypeVar('T', int, float, date, datetime, Any)
 
 class RangeDict:
     def __init__(self, initial_dict: Optional[Dict[Union[T, Tuple[T, T]], Any]] = None):
-        self._buckets = {
-            "int": IntervalTree(),
-            "float": IntervalTree(),
-            "date": IntervalTree(),
-            "datetime": IntervalTree(),
-        }
+        self._buckets = defaultdict(IntervalTree)
 
         if initial_dict:
             for key, value in initial_dict.items():
@@ -23,12 +19,7 @@ class RangeDict:
         lower_key, higher_key = _format_key(key)
         key = (lower_key, higher_key)
 
-        bucket = type(lower_key).__name__
-        # User defined bucket, create new Interval Tree
-        if bucket not in self._buckets:
-            self._buckets[bucket] = IntervalTree()
-
-        self._buckets[bucket].insert(key, value)
+        self._buckets[type(lower_key).__name__].insert(key, value)
 
     def __getitem__(self, key: Union[T, Tuple[T, T]]) -> Any:
         lower_key, higher_key = _format_key(key)
