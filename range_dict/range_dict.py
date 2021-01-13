@@ -9,7 +9,7 @@ T = TypeVar('T', int, float, date, datetime, Any)
 
 class RangeDict:
     def __init__(self, initial_dict: Optional[Dict[Union[T, Tuple[T, T]], Any]] = None):
-        self._buckets = defaultdict(IntervalTree)
+        self._buckets: Dict[str, IntervalTree] = defaultdict(IntervalTree)
 
         if initial_dict:
             for key, value in initial_dict.items():
