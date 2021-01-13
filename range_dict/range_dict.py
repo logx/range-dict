@@ -6,22 +6,25 @@ from range_dict.interval_tree import IntervalTree
 
 T = TypeVar('T', int, float, date, datetime, Any)
 
+RangeDictKey = Union[T, Tuple[T, T]]
+InitialRangeDict = Dict[RangeDictKey, Any]
+
 
 class RangeDict:
-    def __init__(self, initial_dict: Optional[Dict[Union[T, Tuple[T, T]], Any]] = None):
+    def __init__(self, initial_dict: Optional[InitialRangeDict] = None):
         self._buckets: Dict[str, IntervalTree] = defaultdict(IntervalTree)
 
         if initial_dict:
             for key, value in initial_dict.items():
                 self.__setitem__(key, value)
 
-    def __setitem__(self, key: Union[T, Tuple[T, T]], value: Any) -> None:
+    def __setitem__(self, key: RangeDictKey, value: Any) -> None:
         lower_key, higher_key = _format_key(key)
         key = (lower_key, higher_key)
 
         self._buckets[type(lower_key).__name__].insert(key, value)
 
-    def __getitem__(self, key: Union[T, Tuple[T, T]]) -> Any:
+    def __getitem__(self, key: RangeDictKey) -> Any:
         lower_key, higher_key = _format_key(key)
         key = (lower_key, higher_key)
 
@@ -35,13 +38,13 @@ class RangeDict:
             raise KeyError(f"No value for key: '{key}'")
         return result
 
-    def __delitem__(self, key: Union[T, Tuple[T, T]]):  # pragma: no cover
+    def __delitem__(self, key: RangeDictKey):  # pragma: no cover
         raise NotImplementedError
 
     def __len__(self) -> int:
         return len(self.keys())
 
-    def get(self, key: Union[T, Tuple[T, T]], default=None) -> Any:
+    def get(self, key: RangeDictKey, default=None) -> Any:
         try:
             return self.__getitem__(key)
         except KeyError:
@@ -71,7 +74,7 @@ class RangeDict:
         raise NotImplementedError
 
 
-def _format_key(key: Union[T, Tuple[T, T]]) -> Tuple[T, T]:  # type: ignore
+def _format_key(key: RangeDictKey) -> Tuple[T, T]:  # type: ignore
     # Key is a single value, it needs to be transformed to tuple
     if type(key) not in (tuple, list):  # type: ignore
         return key, key  # type: ignore
