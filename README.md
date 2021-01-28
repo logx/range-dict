@@ -1,6 +1,6 @@
-[![Python package](https://github.com/logx/range-dict/workflows/Python%20package/badge.svg)](https://github.com/logx/range-dict/actions)
-[![CodeQL](https://github.com/logx/range-dict/workflows/CodeQL/badge.svg)](https://github.com/logx/range-dict/actions)
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/logx/range-dict/blob/master/LICENSE.txt)
+[![Python package](https://github.com/pkardas/range-dict/workflows/Python%20package/badge.svg)](https://github.com/pkardas/range-dict/actions)
+[![CodeQL](https://github.com/pkardas/range-dict/workflows/CodeQL/badge.svg)](https://github.com/pkardas/range-dict/actions)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/pkardas/range-dict/blob/master/LICENSE.txt)
 
 ### RangeDict 
 Ranges are omnipresent in our lives - we are talking about durations, lengths or intervals. 
@@ -9,7 +9,7 @@ Unfortunately they are hard to model in code using standard data structures buil
 This library offers you fast `range dict` implementation, built on top of Python's standard dictionary.  
 
 #### Documentation
-https://github.com/logx/range-dict/wiki/Documentation
+https://github.com/pkardas/range-dict/wiki/Documentation
 
 #### Example usage
 
